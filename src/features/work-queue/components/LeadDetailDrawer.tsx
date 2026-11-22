@@ -3,6 +3,7 @@ import { useState } from 'react';
 import type { Lead, TouchPoint } from '@/domain/types';
 import { queueCategory } from '@/domain/workflow/callClassification';
 import { describeDueDate, isOpenTouchPoint } from '@/domain/workflow/touchPoints';
+import { AiAssistantButton } from '@/features/ai/components/AiAssistantButton';
 import { QUEUE_CATEGORY_STYLE } from '@/features/work-queue/queueStyles';
 import { LEAD_STATUS_STYLE } from '@/shared/ui/leadStatusStyles';
 
@@ -84,6 +85,8 @@ export function LeadDetailDrawer({
         )}
 
         {/* Contact info */}
+        <div className="px-4 sm:px-6 pt-4"><AiAssistantButton lead={lead} /></div>
+
         <div className="px-4 sm:px-6 py-4 border-b border-slate-200">
           <div className="grid grid-cols-2 gap-4">
             <div>

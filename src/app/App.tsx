@@ -18,6 +18,7 @@ import { EscalationsPage } from '@/features/escalations/EscalationsPage';
 import { TipsPage } from '@/features/tips/TipsPage';
 import { LeadPoolPage } from '@/features/lead-pool/LeadPoolPage';
 import { UsersPage } from '@/features/users/UsersPage';
+import { KnowledgePage } from '@/features/ai/pages/KnowledgePage';
 import { CampaignsPage } from '@/features/campaigns/CampaignsPage';
 
 export function App() {
@@ -55,6 +56,7 @@ export function App() {
       {currentPage === 'teams' && <TeamsPage />}
       {currentPage === 'escalations' && <EscalationsPage />}
       {currentPage === 'tips' && <TipsPage />}
+      {currentPage === 'knowledge' && <KnowledgePage />}
     </AppShell>
   );
 }

@@ -2,6 +2,7 @@ import { Ban, Building2, Download, Hash, History, Mail, Phone, Play, Users, X, X
 import { useMemo, useState } from 'react';
 import type { Lead } from '@/domain/types';
 import { campaignLabel } from '@/domain/workflow/campaignLabel';
+import { AiAssistantButton } from '@/features/ai/components/AiAssistantButton';
 import { TakeLeadsModal } from '@/features/take-leads/TakeLeadsModal';
 import { useConfirm } from '@/shared/components/ConfirmDialog';
 import { LeadPicker } from '@/shared/components/LeadPicker';
@@ -165,6 +166,8 @@ export function MyLeadsPage() {
                 <X className="w-4 h-4 text-slate-600" />
               </button>
             </div>
+
+            <div className="px-4 sm:px-6 pt-4"><AiAssistantButton lead={selectedLead} /></div>
 
             <div className="px-4 sm:px-6 py-4 border-b border-slate-200">
               <div className="grid grid-cols-2 gap-4">

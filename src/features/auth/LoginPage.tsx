@@ -1,5 +1,5 @@
 import { roleLabel } from '@/domain/user/roleLabel';
-import { Calendar, Check, Mail, Phone, TrendingUp } from 'lucide-react';
+import { Calendar, Check, Mail, Phone, Sparkles, TrendingUp } from 'lucide-react';
 import { useState } from 'react';
 import type { User, UserRole } from '@/domain/types';
 import { setCurrentUser, useStore } from '@/store';
@@ -12,14 +12,10 @@ const LOGIN_GROUPS: { role: UserRole; label: string }[] = [
 export function LoginPage({ onLogin }: { onLogin: () => void }) {
   const { state, dispatch } = useStore();
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
-  const [password, setPassword] = useState('');
-  const [loginError, setLoginError] = useState('');
   const teamLabel = (u: User) => state.teams.find(t => t.id === u.teamId)?.name ?? '';
 
   const handleLogin = () => {
     if (selectedUser) {
-      // accounts the Admin created have a real password; the demo people accept anything (prototype)
-      if (selectedUser.password !== undefined && password !== selectedUser.password) { setLoginError('Wrong password for this account.'); return; }
       dispatch(setCurrentUser(selectedUser.id));
       onLogin();
     }
@@ -68,6 +64,7 @@ export function LoginPage({ onLogin }: { onLogin: () => void }) {
               { icon: Phone, text: 'Structured call workflows with touch points' },
               { icon: Mail, text: 'Automated email templates and bulk sending' },
               { icon: Calendar, text: 'Meeting scheduling with calendar integration' },
+              { icon: Sparkles, text: 'NEW: AI Call Assistant with script, objections and customer brief' },
             ].map((item, i) => (
               <div key={i} className="flex items-center gap-3 text-slate-300">
                 <div className="w-9 h-9 bg-white/5 rounded-lg flex items-center justify-center border border-white/10">
@@ -91,7 +88,7 @@ export function LoginPage({ onLogin }: { onLogin: () => void }) {
           </div>
 
           <h2 className="text-2xl font-bold tracking-tight text-slate-900 mb-1">Welcome back</h2>
-          <p className="text-slate-600 text-sm mb-6">Select your profile to sign in</p>
+          <p className="text-slate-600 text-sm mb-6">Select any profile to sign in. No password in this demo</p>
 
           {/* User selection: grouped by role, the list scrolls (there are many people) */}
           <div className="max-h-[16rem] sm:max-h-[22rem] overflow-y-auto scrollbar-thin pr-1 mb-5 space-y-3" role="radiogroup" aria-label="Profile">
@@ -107,7 +104,7 @@ export function LoginPage({ onLogin }: { onLogin: () => void }) {
                       return (
                         <button
                           key={user.id}
-                          onClick={() => { setSelectedUser(user); setLoginError(''); }}
+                          onClick={() => { setSelectedUser(user); }}
                           role="radio"
                           aria-checked={selected}
                           className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl border transition-all text-left ${
@@ -136,22 +133,6 @@ export function LoginPage({ onLogin }: { onLogin: () => void }) {
                 </div>
               );
             })}
-          </div>
-
-          {/* Password field (visual only) */}
-          <div className="mb-5">
-            <label htmlFor="login-password" className="block text-sm font-medium text-slate-700 mb-1.5">Password</label>
-            <input
-              id="login-password"
-              type="password"
-              value={password}
-              onChange={e => { setPassword(e.target.value); setLoginError(''); }}
-              onKeyDown={e => { if (e.key === 'Enter') handleLogin(); }}
-              aria-invalid={!!loginError}
-              placeholder="Enter your password"
-              className="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 bg-white text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-shadow"
-            />
-            {loginError && <p role="alert" className="text-xs text-rose-600 mt-1.5">{loginError}</p>}
           </div>
 
           <button

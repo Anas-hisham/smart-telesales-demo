@@ -1,8 +1,8 @@
 /** Which pages exist, who may open them, and where each role lands after signing in. */
-import { BarChart3, Bell, Calendar, CheckCircle2, Database, Flag, Inbox, LayoutDashboard, Lightbulb, ListOrdered, Mail, Network, Trophy, UserPlus, Users } from 'lucide-react';
+import { BarChart3, Bell, BookOpen, Calendar, CheckCircle2, Database, Flag, Inbox, LayoutDashboard, Lightbulb, ListOrdered, Mail, Network, Trophy, UserPlus, Users } from 'lucide-react';
 import type { User } from '@/domain/types';
 
-export type PageId = 'adminleads' | 'users' | 'campaigns' | 'dashboard' | 'workqueue' | 'calendar' | 'leads' | 'updates' | 'tasks' | 'emails' | 'sales' | 'analytics' | 'teams' | 'tips' | 'escalations';
+export type PageId = 'adminleads' | 'users' | 'campaigns' | 'dashboard' | 'workqueue' | 'calendar' | 'leads' | 'updates' | 'tasks' | 'emails' | 'sales' | 'analytics' | 'teams' | 'tips' | 'escalations' | 'knowledge';
 
 export interface NavItem {
   id: PageId;
@@ -19,6 +19,7 @@ export const NAV_ITEMS: NavItem[] = [
   { id: 'adminleads', label: 'Lead Pool', icon: Database, roles: ['admin'] },
   { id: 'campaigns', label: 'Campaigns', icon: ListOrdered, roles: ['admin'] },
   { id: 'users', label: 'Create User', icon: UserPlus, roles: ['admin'] },
+  { id: 'knowledge', label: 'Knowledge Base', icon: BookOpen, roles: ['admin', 'operation_manager'] },
   { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard, roles: ALL_ROLES },
   { id: 'analytics', label: 'Analytics', icon: BarChart3, roles: ['operation_manager', 'team_leader', 'agent'] },
   { id: 'teams', label: 'Teams', icon: Network, roles: ['admin', ...ALL_ROLES, 'quality'] },
